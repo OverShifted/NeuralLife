@@ -1,0 +1,19 @@
+// World
+#define WORLD_SIZE_X 100
+#define WORLD_SIZE_Y WORLD_SIZE_X
+
+#define GENERATION_LIFETIME 300
+#define CREATURE_RATIO 0.9
+
+// Renderer
+#define CELL_RENDER_SIZE 9
+#define CELL_PADDING_SIZE 1
+
+// Brain
+#define HIDDEN_NEURON_COUNT 8
+#define INPUT_NEURON_COUNT 3
+#define OUTPUT_NEURON_COUNT 3
+
+#define CONNECTION_COUNT 20
+
+#define MUTATION_RATE 0.05
