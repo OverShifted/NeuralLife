@@ -1,5 +1,6 @@
 # NeuralLife
 Simple life simulator with genetic algorithm and neural networks.
+Inspired by https://github.com/davidrmiller/biosim4.
 
 To run:
 ```sh
