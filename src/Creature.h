@@ -1,4 +1,5 @@
 #include <array>
+#include <memory>
 
 #include <SFML/Graphics.hpp>
 #include "Config.h"
@@ -52,7 +53,7 @@ struct Brain
 struct Creature
 {
     Creature() = default;
-    Creature(Creature* parent1, Creature* parent2);
+    Creature(std::shared_ptr<Creature> parent1, std::shared_ptr<Creature> parent2);
 
     Brain::OutputData Update(Brain::InputData input) 
     {

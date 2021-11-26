@@ -9,7 +9,7 @@ World::World()
     {
         if (Random::Value() > CREATURE_RATIO)
         {
-            auto creature = new Creature();
+            auto creature = std::make_shared<Creature>();
             creature->position = sf::Vector2u(i % WORLD_SIZE_X, i / WORLD_SIZE_X);
 
             m_Map[i] = creature;
@@ -109,14 +109,14 @@ void World::Update()
 
 void World::Reproduce()
 {
-    std::vector<Creature*> survivors;
+    std::vector<std::shared_ptr<Creature>> survivors;
     survivors.reserve(m_Creatures.size());
 
     for (auto creature : m_Creatures)
     {
         // if (creature->position.x > WORLD_SIZE_X * 0.8 || creature->position.x < WORLD_SIZE_X * 0.2)
         // if (creature->position.y > WORLD_SIZE_Y * 0.8)
-        constexpr float tresh = 0.4;
+        constexpr float tresh = 0.2;
         if (creature->position.x > WORLD_SIZE_X * tresh && creature->position.x < WORLD_SIZE_X * (1 - tresh) && creature->position.y > WORLD_SIZE_Y * tresh && creature->position.y < WORLD_SIZE_Y * (1 - tresh))
         {
             survivors.push_back(creature);
@@ -134,10 +134,10 @@ void World::Reproduce()
     {
         if (Random::Value() > CREATURE_RATIO)
         {
-            Creature* parent1 = survivors[Random::Value() * survivors.size()];
-            Creature* parent2 = survivors[Random::Value() * survivors.size()];
+            auto parent1 = survivors[Random::Value() * survivors.size()];
+            auto parent2 = survivors[Random::Value() * survivors.size()];
 
-            auto creature = new Creature(parent1, parent2);
+            auto creature = std::make_shared<Creature>(parent1, parent2);
             creature->position = sf::Vector2u(i % WORLD_SIZE_X, i / WORLD_SIZE_X);
 
             m_Map[i] = creature;

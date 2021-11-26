@@ -1,4 +1,5 @@
 #include <array>
+#include <memory>
 #include <SFML/Graphics.hpp>
 
 #include "Config.h"
@@ -15,6 +16,6 @@ public:
     void Reproduce();
 
 private:
-    std::array<Creature*, WORLD_SIZE_X * WORLD_SIZE_Y> m_Map;
-    std::vector<Creature*> m_Creatures;
+    std::array<std::shared_ptr<Creature>, WORLD_SIZE_X * WORLD_SIZE_Y> m_Map;
+    std::vector<std::shared_ptr<Creature>> m_Creatures;
 };

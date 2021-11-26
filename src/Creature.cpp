@@ -94,7 +94,7 @@ sf::Color Brain::GetColor()
     return sf::Color(r, g, b);
 }
 
-Creature::Creature(Creature* parent1, Creature* parent2)
+Creature::Creature(std::shared_ptr<Creature> parent1, std::shared_ptr<Creature> parent2)
 {
     for (uint32_t i = 0; i < brain.connections.size(); i++)
     {
