@@ -5,6 +5,9 @@
 #define GENERATION_LIFETIME 300
 #define CREATURE_RATIO 0.9
 
+#define ACTIVATION_VALUE 0.5
+// #define ACTIVATION_VALUE Random::Value()
+
 // Renderer
 #define CELL_RENDER_SIZE 9
 #define CELL_PADDING_SIZE 1

@@ -94,13 +94,25 @@ sf::Color Brain::GetColor()
     return sf::Color(r, g, b);
 }
 
+static void MutateConnection(Connection& conn)
+{
+    if (Random::Value() > MUTATION_RATE)
+        return;
+
+    conn.weight += (Random::Value() - 0.5) * 2.0;
+
+    if (Random::Value() < MUTATION_RATE)
+        conn.src = RandomNeuron(INPUT_NEURON_COUNT);
+
+    if (Random::Value() < MUTATION_RATE)
+        conn.dest = RandomNeuron(OUTPUT_NEURON_COUNT);
+}
+
 Creature::Creature(std::shared_ptr<Creature> parent1, std::shared_ptr<Creature> parent2)
 {
     for (uint32_t i = 0; i < brain.connections.size(); i++)
     {
-        if (Random::Value() < MUTATION_RATE)
-            brain.connections[i] = RandomConnection();
-        else
-            brain.connections[i] = (Random::Value() > 0.5 ? parent1 : parent2)->brain.connections[i];
+        brain.connections[i] = (Random::Value() > 0.5 ? parent1 : parent2)->brain.connections[i];
+        MutateConnection(brain.connections[i]);
     }
 }

@@ -43,14 +43,14 @@ void World::Update()
     {
         auto out = creature->Update({ (float)creature->position.x, (float)creature->position.y, (float)creature->age });
 
-        if (out[Neuron::OUT0] > Random::Value() && creature->position.x < WORLD_SIZE_X - 1 && !m_Map[creature->position.x + 1 + creature->position.y * WORLD_SIZE_X])
+        if (out[Neuron::OUT0] > ACTIVATION_VALUE && creature->position.x < WORLD_SIZE_X - 1 && !m_Map[creature->position.x + 1 + creature->position.y * WORLD_SIZE_X])
         {
             m_Map[creature->position.x + 1 + creature->position.y * WORLD_SIZE_X] = creature;
             m_Map[creature->position.x + creature->position.y * WORLD_SIZE_X] = nullptr;
 
             creature->position.x += 1;
         }
-        else if (out[Neuron::OUT0] < -Random::Value() && creature->position.x > 0 && !m_Map[creature->position.x - 1 + creature->position.y * WORLD_SIZE_X])
+        else if (out[Neuron::OUT0] < -ACTIVATION_VALUE && creature->position.x > 0 && !m_Map[creature->position.x - 1 + creature->position.y * WORLD_SIZE_X])
         {
             m_Map[creature->position.x - 1 + creature->position.y * WORLD_SIZE_X] = creature;
             m_Map[creature->position.x + creature->position.y * WORLD_SIZE_X] = nullptr;
@@ -58,14 +58,14 @@ void World::Update()
             creature->position.x -= 1;
         }
 
-        if (out[Neuron::OUT1] > Random::Value() && creature->position.y < WORLD_SIZE_Y - 1 && !m_Map[creature->position.x + (creature->position.y + 1) * WORLD_SIZE_X])
+        if (out[Neuron::OUT1] > ACTIVATION_VALUE && creature->position.y < WORLD_SIZE_Y - 1 && !m_Map[creature->position.x + (creature->position.y + 1) * WORLD_SIZE_X])
         {
             m_Map[creature->position.x + (creature->position.y + 1) * WORLD_SIZE_X] = creature;
             m_Map[creature->position.x + creature->position.y * WORLD_SIZE_X] = nullptr;
 
             creature->position.y += 1;
         }
-        else if (out[Neuron::OUT1] < -Random::Value() && creature->position.y > 0 && !m_Map[creature->position.x + (creature->position.y - 1) * WORLD_SIZE_X])
+        else if (out[Neuron::OUT1] < -ACTIVATION_VALUE && creature->position.y > 0 && !m_Map[creature->position.x + (creature->position.y - 1) * WORLD_SIZE_X])
         {
             m_Map[creature->position.x + (creature->position.y - 1) * WORLD_SIZE_X] = creature;
             m_Map[creature->position.x + creature->position.y * WORLD_SIZE_X] = nullptr;
@@ -73,7 +73,7 @@ void World::Update()
             creature->position.y -= 1;
         }
 
-        if (std::abs(out[Neuron::OUT2]) > Random::Value())
+        if (std::abs(out[Neuron::OUT2]) > ACTIVATION_VALUE)
         {
             std::array<sf::Vector2i, 8> emptyNeighbors;
             uint8_t emptyNeighborCount = 0;
@@ -115,9 +115,9 @@ void World::Reproduce()
     for (auto creature : m_Creatures)
     {
         // if (creature->position.x > WORLD_SIZE_X * 0.8 || creature->position.x < WORLD_SIZE_X * 0.2)
-        // if (creature->position.y > WORLD_SIZE_Y * 0.8)
-        constexpr float tresh = 0.2;
-        if (creature->position.x > WORLD_SIZE_X * tresh && creature->position.x < WORLD_SIZE_X * (1 - tresh) && creature->position.y > WORLD_SIZE_Y * tresh && creature->position.y < WORLD_SIZE_Y * (1 - tresh))
+        if (creature->position.y < WORLD_SIZE_Y * 0.3)
+        // constexpr float tresh = 0.2;
+        // if (creature->position.x > WORLD_SIZE_X * tresh && creature->position.x < WORLD_SIZE_X * (1 - tresh) && creature->position.y > WORLD_SIZE_Y * tresh && creature->position.y < WORLD_SIZE_Y * (1 - tresh))
         {
             survivors.push_back(creature);
         }

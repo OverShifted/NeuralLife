@@ -43,7 +43,7 @@ int main()
         world.Render(window);
         window.display();
 
-        // sf::sleep(sf::seconds(1 / 20));
+        // sf::sleep(sf::seconds(0.01));
 
         step++;
     }
