@@ -14,7 +14,7 @@ int main()
     uint32_t step = 0;
     uint32_t generation = 0;
 
-    sf::RenderWindow window(sf::VideoMode(WORLD_SIZE_X * CELL_RENDER_SIZE, WORLD_SIZE_Y * CELL_RENDER_SIZE), "Biosim: Generation #0");
+    sf::RenderWindow window(sf::VideoMode(WORLD_SIZE_X * CELL_RENDER_SIZE, WORLD_SIZE_Y * CELL_RENDER_SIZE), "NeuralLife: Generation #0");
 
     while (window.isOpen())
     {
@@ -29,12 +29,9 @@ int main()
         {
             step = 0;
             generation++;
-
-            window.setTitle("Biosim: Generation #" + std::to_string(generation));
-
             world.Reproduce();
 
-            std::cout << "Reproduce" << std::endl;
+            window.setTitle("NeuralLife: Generation #" + std::to_string(generation));
         }
 
         world.Update();

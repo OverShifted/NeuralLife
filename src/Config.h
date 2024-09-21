@@ -1,16 +1,16 @@
 // World
-#define WORLD_SIZE_X 100
+#define WORLD_SIZE_X 90
 #define WORLD_SIZE_Y WORLD_SIZE_X
 
 #define GENERATION_LIFETIME 300
 #define CREATURE_RATIO 0.9
 
-#define ACTIVATION_VALUE 0.5
+#define ACTIVATION_VALUE 100
 // #define ACTIVATION_VALUE Random::Value()
 
 // Renderer
-#define CELL_RENDER_SIZE 9
-#define CELL_PADDING_SIZE 1
+#define CELL_RENDER_SIZE 10
+#define CELL_PADDING_SIZE 0
 
 // Brain
 #define HIDDEN_NEURON_COUNT 8

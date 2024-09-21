@@ -24,14 +24,15 @@ World::World()
 
 void World::Render(sf::RenderTarget& target)
 {
-    sf::RectangleShape shape(sf::Vector2f(CELL_RENDER_SIZE - CELL_PADDING_SIZE, CELL_RENDER_SIZE - CELL_PADDING_SIZE));
+    // sf::RectangleShape shape(sf::Vector2f(CELL_RENDER_SIZE - CELL_PADDING_SIZE, CELL_RENDER_SIZE - CELL_PADDING_SIZE));
+    sf::CircleShape shape((CELL_RENDER_SIZE - CELL_PADDING_SIZE) * 0.5f);
 
     for (uint32_t x = 0; x < WORLD_SIZE_X; x++)
     {
         for (uint32_t y = 0; y < WORLD_SIZE_Y; y++)
         {
             shape.setPosition(sf::Vector2f(x * CELL_RENDER_SIZE, y * CELL_RENDER_SIZE));
-            shape.setFillColor(m_Map[x + y * WORLD_SIZE_X] ? m_Map[x + y * WORLD_SIZE_X]->brain.GetColor() : sf::Color::White);
+            shape.setFillColor(m_Map[x + y * WORLD_SIZE_X] ? m_Map[x + y * WORLD_SIZE_X]->brain.GetColor() : sf::Color::Black);
             target.draw(shape);
         }
     }
@@ -42,6 +43,9 @@ void World::Update()
     for (auto creature : m_Creatures)
     {
         auto out = creature->Update({ (float)creature->position.x, (float)creature->position.y, (float)creature->age });
+        // for (int i = 0; i < out.size(); i++)
+        //     std::cout << out[i] << " ";
+        // std::cout << " ";
 
         if (out[Neuron::OUT0] > ACTIVATION_VALUE && creature->position.x < WORLD_SIZE_X - 1 && !m_Map[creature->position.x + 1 + creature->position.y * WORLD_SIZE_X])
         {
@@ -82,8 +86,8 @@ void World::Update()
             {
                 for (int j = -1; j < 2; j++)
                 {
-                    auto newx = creature->position.x + i;
-                    auto newy = creature->position.y + j;
+                    int newx = creature->position.x + i;
+                    int newy = creature->position.y + j;
 
                     if (newx >= 0 && newy >= 0 && newx < WORLD_SIZE_X && newy < WORLD_SIZE_Y && !m_Map[newx + newy * WORLD_SIZE_X])
                     {

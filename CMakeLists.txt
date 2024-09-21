@@ -5,14 +5,18 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12)
 endif()
 
 set(CMAKE_CXX_STANDARD 17)
-project(biosim)
+project(NeuralLife)
+
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 file(GLOB_RECURSE source_files "src/*.cpp")
 file(GLOB_RECURSE header_files "src/*.h")
 
-add_executable(biosim
+add_executable(NeuralLife
     ${source_files}
     ${header_files}
 )
 
-target_link_libraries(biosim PRIVATE sfml-graphics sfml-window sfml-system)
+target_link_libraries(NeuralLife PRIVATE sfml-graphics sfml-window sfml-system)
