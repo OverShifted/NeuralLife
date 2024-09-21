@@ -2,7 +2,7 @@
 Simple life simulator with genetic algorithm and neural networks.
 Inspired by https://github.com/davidrmiller/biosim4.
 
-https://github.com/OverShifted/NeuralLife/raw/refs/heads/main/animations/animation.mp4
+https://github.com/user-attachments/assets/bf8c4946-5fcd-4ac4-aa4c-263666a61efb
 
 To run:
 ```sh
